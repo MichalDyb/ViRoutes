@@ -1,0 +1,32 @@
+{% extends 'base/index.html' %} 
+
+{% block content %}             
+    <nav class='flex-100'>
+        {% block navlink %} {% endblock navlink %}
+        {% include 'home/link/index.html' %}
+        {% include 'routes/link/profile.html' %}
+        {% include 'routes/link/my-routes.html' %}
+        <span class='nav_text'>Edytuj trasę</span>
+    </nav>
+    <div class='flex-100'>
+        <h1>Edytuj trasę</h1>
+        <h2>Wprowadź dane trasy</h2>
+        {% for message in messages %}
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+            <p class='info'>{{ message }}</p>
+        {% elif message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+            <p class='error'>{{ message }}</p>
+        {% else %}
+            <p>{{ message }}</p>
+        {% endif %}
+    {% endfor %}
+    </div>
+    <div class='flex-100'>
+    <form class='my_form' action='{% url 'routes:edit-route' route=route next_url=next_url %}' method='POST'>
+        {% csrf_token %}
+
+        {{ form.as_p }}
+        <p><input id='submit' type='submit' value='Zapisz zmiany'></p>
+    </form>
+    </div>
+{% endblock content %}

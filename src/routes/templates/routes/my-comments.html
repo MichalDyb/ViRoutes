@@ -1,0 +1,35 @@
+{% extends 'base/index.html' %} 
+{% load static %}
+
+{% block content %}             
+    <nav class='flex-100'>
+        {% block navlink %} {% endblock navlink %}
+        {% include 'home/link/index.html' %}
+        {% include 'routes/link/profile.html' %}
+
+        <span class='nav_text'>Moje komentarze</span>
+    </nav>
+
+    <div class='flex-100'>
+        <h1>Moje komentarze</h1>
+        {% for comment in page_comments %}
+            <div style='font-weight:600;'>
+                {{ comment.created_by.username }} {{ comment.date_created|date:"H:i:s j E Y" }} 
+                {% if comment.referenced_route.is_published == False %}
+                    <a href='{% url 'routes:my-route-detail' route=comment.referenced_route.id %}'>Przejdź do trasy</a>
+                {% else %}
+                    <a href='{% url 'routes:route-detail' route=comment.referenced_route.id %}''>Przejdź do trasy</a>
+                {% endif %}
+            </div>
+            <div style='margin-top:2px;'>{{ comment.content }}</div> 
+            <div style='margin-top:3px;'>
+            <a style='margin-right:1px;' href='{% url 'routes:add-comment-rate' comment=comment.id rate=1 next_url=request.path %}'><img class='comment_arrow' src='{% static 'img/comment_arrow_up.png' %}'></a>
+            <span class='comment_rate_text'>{{ comment.sumRate }}</span>
+            <a style='margin-left:1px;' href='{% url 'routes:add-comment-rate' comment=comment.id rate=-1 next_url=request.path %}'><img class='comment_arrow' src='{% static 'img/comment_arrow_down.png' %}'></a>
+            </div> 
+            <hr>
+            {% empty %}
+            Brak Komentarzy
+        {% endfor %}
+    </div>
+{% endblock content %}

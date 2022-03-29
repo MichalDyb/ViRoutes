@@ -1,0 +1,327 @@
+/* 
+SMACSS (ang. Scalable and Modular Architecture for CSS), oznacza skalowalną i modularną architekturę CSS
+Arkusz styli zawierający style używane wieloktornie na jednej stronie. 
+W tej sekcji używam klas.
+*/
+
+.footer_link {
+    padding-left: 7.5px; 
+    padding-right: 7.5px; 
+    text-align: center; 
+    color:hsl(204, 66%, 50%); 
+    text-decoration: none; 
+}
+
+.page_header_icon_background {
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    flex-grow: 0; 
+    width: 42px; 
+    height: 42px; 
+    border-radius: 50%;
+}
+
+#page_header_end > .page_header_icon_background {
+    margin-right: 10px; 
+}
+#page_header_end > .page_header_icon_background:last-child {
+    margin-right: 26px; 
+}
+
+.page_header_icon_img {
+    width: 22px;  
+    height: 22px; 
+}
+
+#page_header_menu_button > .page_header_icon_img {
+    width: 18px;  
+    height: 18px;
+}
+
+.page_header_link_description {
+    display: none; 
+    position: absolute; 
+    top: 50px; 
+    padding: 6px 16px 6px 16px; 
+    border-radius: 2px; 
+    background-color: hsl(0, 0%, 35%); 
+    color: hsl(0, 0%, 100%); 
+    font-size: 0.8em; 
+    opacity: 0.95; 
+}
+
+.page_header_collapsed_menu_content_description, .page_header_collapsed_menu_content_description_dynamic, .page_header_collapsed_menu_content_link {
+    display: flex;
+    align-items: center;
+    padding: 10.5px 24px 10.5px 24px;
+    flex: 0;
+}
+
+.page_header_collapsed_menu_content_link {
+    word-wrap: break-word;
+}
+
+.page_header_collapsed_menu_content_description, .page_header_collapsed_menu_content_description_dynamic {
+    text-transform: uppercase;
+    padding-right: 24px;
+    font-weight: 500;
+    color:hsl(0, 0%, 60%);
+}
+
+.page_header_collapsed_menu_content_description_dynamic ~ .page_header_collapsed_menu_content_link {
+    display: none;
+}
+
+.page_header_collapsed_menu_content_description_show_links ~ .page_header_collapsed_menu_content_link {
+    display: flex;
+}
+
+
+.page_header_collapsed_menu_content_description_text {
+    width: 162px;
+    word-wrap: break-word;
+    overflow-x: hidden;
+}
+
+.page_header_collapsed_menu_content_description_arrow {
+    margin-left: auto;
+    align-self: center;
+    width: 22px;
+}
+
+.page_header_collapsed_menu_content_description_show_links .page_header_collapsed_menu_content_description_arrow {
+    transform: rotate(180deg);
+}
+
+.page_header_collapsed_menu_content_link {
+    color: hsl(0, 0%, 90%);
+    text-decoration: none;
+}
+
+.page_header_collapsed_menu_content_partition {
+    display: block;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    height: 2px;
+    background-color: hsl(0, 0%, 26%);
+}
+
+.flex-row {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.flex-column {
+    display: flex;
+    flex-flow: column wrap;
+}
+
+.flex-100 {
+    flex-basis: 100%;
+}
+
+.flex-0 {
+    flex-grow: 0;
+}
+
+.flex-1 {
+    flex-grow: 1;
+    flex-basis: 150px;
+}
+
+.flex-2 {
+    flex-grow: 2;
+    flex-basis: 200px;
+}
+
+.flex-3 {
+    flex-grow: 3;
+    flex-basis: 300px;
+}
+
+.flex-4 {
+    flex-grow: 4;
+    flex-basis: 400px;
+}
+
+.flex-5 {
+    flex-grow: 5;
+    flex-basis: 500px;
+}
+
+.flex-gap {
+    gap: 15px;
+}
+
+.flex-justify-start {
+    justify-content: flex-start;
+}
+
+.flex-justify-center {
+    justify-content: center;
+}
+
+.flex-justify-end {
+    justify-content: flex-end;
+}
+
+.flex-align-start {
+    align-content: flex-start;
+}
+
+.flex-align-center {
+    align-content: center;
+}
+
+.flex-align-end {
+    align-content: flex-end;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.nav_link {
+    text-decoration: none;
+}
+
+.nav_text {
+    color: hsl(0, 0%, 80%)
+}
+
+.nav_link, .nav_text, .nav_div {
+    font-size: 0.9em;
+    margin-right: 1.5px;
+}
+
+.error_page_info {
+    color: hsl(0, 82%, 59%);
+}
+
+.my_form  p{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.my_form label {
+    display: block;
+    margin-bottom: 6px;
+    padding-left: 2px;
+    width: 150px;
+}
+
+.my_form input {
+    padding: 7px 10px 7px 10px;
+}
+
+.my_form textarea {
+    padding: 7px 11px 7px 11px;
+}
+
+.my_form input, .my_form textarea{
+    display: block;
+    width: 100%;
+    max-width: 300px;
+}
+
+.helptext {
+    color: hsl(204, 66%, 60%);
+    padding-left: 4px;
+}
+
+.my_form input[type=button], .my_form input[type=submit], .my_form input[type=reset] {
+    max-width: fit-content;
+    padding: 10px 15px 10px 15px;
+    border-radius: 5px;
+    background-color: hsl(204, 66%, 45%); 
+    border: 2px solid hsl(204, 66%, 25%); 
+    color: hsl(0, 0%, 100%);
+}
+
+.my_form .errorlist {
+    color: hsl(0, 82%, 59%);
+    font-size: 0.9em;
+}
+
+.info {
+    color: hsl(204, 66%, 60%);
+}
+
+.error {
+    color: hsl(0, 82%, 59%);
+}
+
+.button_link {
+    display: inline-block;
+    color: hsl(0, 0%, 82%) !important;
+    background-color: hsl(0, 0%, 5%);
+    padding: 3px 15px 3px 15px;
+    border: 1px solid white;
+    border-radius: 5px;
+    margin-left: 5px;
+    text-decoration: none;
+}
+
+.button_link:hover {
+    color: hsl(0, 0%, 85%) !important;
+    background-color: hsl(0, 0%, 2%);
+}
+
+.tutorial_img {
+    max-width: 100%;
+}
+
+.my_table {
+    border-collapse: collapse;
+}
+
+.my_table, .my_tr, .my_tr_m, .my_td {
+    border: 1px solid white;
+}
+
+.my_tr, .my_tr, .my_tr_m, .my_td{
+    border-collapse: inherit;
+}
+
+.my_tr {
+    margin-bottom: 50px;
+}
+
+.my_td {
+    padding: 10px 15px 10px 15px;
+ }
+
+.change_page_button {
+    padding: 10px 15px 10px 15px;
+    border-radius: 7.5px;
+    font-size: 1.2em;
+    color:hsl(0, 0%, 95%);
+    background-color: hsl(204, 100%, 40%);
+}
+
+.no_border {
+    border: 0;
+}
+
+.small_submit_button input{
+    min-width: 60px;
+    text-align: center;
+    border-radius: 5px;
+    color:hsl(0, 0%, 95%);
+    background-color: hsl(204, 100%, 40%);
+}
+
+.comment_arrow {
+    height: 10px;
+    background: hsl(204, 100%, 20%);
+    padding: 5px 2px 5px 2px;
+}
+
+.comment_rate_text {
+    font-size: 0.95em;
+
+    color: hsl(0, 0%, 85%);
+    justify-self: center;
+}

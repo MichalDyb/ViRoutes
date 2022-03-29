@@ -1,0 +1,86 @@
+{% load static %}
+
+{% block menu %}  
+    <header id='page_header'>
+        <div id='page_header_start'>
+            <div class='page_header_icon_background' id='page_header_menu_button'>
+                <img class='page_header_icon_img' src='{% static 'img/menu_icon.png' %}'>
+            </div>
+            <a href='{% url 'home:index' %}' id='page_header_home_logo_link'>
+                <img id='page_header_home_logo_img' src='{% static 'img/menu_logo_icon.png' %}'>
+            </a>
+            <div id='page_header_collapsed_menu'>
+                <div id='page_header_collapsed_menu_content'>
+                    <div class='page_header_collapsed_menu_content_partition'></div>
+                    <div>
+                        <div class='page_header_collapsed_menu_content_description'></div> 
+                            <a href='{% url 'home:index' %}' class='page_header_collapsed_menu_content_link'>Strona główna</a>
+                            {% if not request.user.is_authenticated %}
+                                <a href='{% url 'accounts:login' %}' class='page_header_collapsed_menu_content_link'>Zaloguj się</a>
+                                <a href='{% url 'accounts:register' %}' class='page_header_collapsed_menu_content_link'>Zarejestruj się</a>
+                            {% endif %}
+                            {% if request.user.is_authenticated %}
+                                <a href='{% url 'accounts:index' %}' class='page_header_collapsed_menu_content_link'>Moje konto</a>
+                                <a href='{% url 'accounts:logout' %}' class='page_header_collapsed_menu_content_link'>Wyloguj się</a>
+                            {% endif %}
+                            <div class='page_header_collapsed_menu_content_partition'></div>
+                    </div>
+                    <div>
+                        <div class='page_header_collapsed_menu_content_description_dynamic'>
+                        <div class='page_header_collapsed_menu_content_description_text'>Trasy</div>
+                        <img class='page_header_collapsed_menu_content_description_arrow' src='{% static 'img/arrow_menu_icon.png' %}'>
+                        </div> 
+                        <a href='{% url 'routes:routes' %}' class='page_header_collapsed_menu_content_link'>Wszystkie trasy</a>
+                        <a href='{% url 'routes:find' %}' class='page_header_collapsed_menu_content_link'>Wyszukaj trasę</a>
+                        <div class='page_header_collapsed_menu_content_partition'></div>
+                    </div>
+                    {% if request.user.is_authenticated %}
+                        <div>
+                            <div class='page_header_collapsed_menu_content_description_dynamic'>
+                            <div class='page_header_collapsed_menu_content_description_text'>Mój Profil</div>
+                            <img class='page_header_collapsed_menu_content_description_arrow' src='{% static 'img/arrow_menu_icon.png' %}'>
+                            </div>
+                            <a href='{% url 'routes:profile' %}' class='page_header_collapsed_menu_content_link'>Mój profil</a>
+                            <a href='{% url 'routes:add-route' %}' class='page_header_collapsed_menu_content_link'>Dodaj trasę</a>
+                            <a href='{% url 'routes:tutorial' %}' class='page_header_collapsed_menu_content_link'>Poradnik wyznaczania trasy</a>
+                            <a href='{% url 'routes:my-routes' %}' class='page_header_collapsed_menu_content_link'>Moje trasy</a>
+                            <a href='{% url 'routes:my-comments' %}' class='page_header_collapsed_menu_content_link'>Moje komentarze</a>
+                            <a href='{% url 'routes:favorite-routes' %}' class='page_header_collapsed_menu_content_link'>Ulubione trasy</a>
+                            <div class='page_header_collapsed_menu_content_partition'></div>
+                        </div>
+                    {% endif %}
+                    <div>
+                            <div class='page_header_collapsed_menu_content_description_dynamic'>
+                            <div class='page_header_collapsed_menu_content_description_text'>WIĘCEJ</div>
+                            <img class='page_header_collapsed_menu_content_description_arrow' src='{% static 'img/arrow_menu_icon.png' %}'>
+                            </div> 
+                                <a href='{% url 'home:privacy' %}' class='page_header_collapsed_menu_content_link'>Polityka prywatności</a>
+                                <a href='{% url 'home:cookies' %}' class='page_header_collapsed_menu_content_link'>Polityka Cookies</a>
+                                <a href='{% url 'home:contact' %}' class='page_header_collapsed_menu_content_link'>Kontakt</a>
+                                <a href='{% url 'home:about' %}' class='page_header_collapsed_menu_content_link'>O nas</a>
+                            <div class='page_header_collapsed_menu_content_partition'></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id='page_header_clock'></div>
+        <div id='page_header_end'>
+            {% if not request.user.is_authenticated %}
+                <a href='{% url 'accounts:login' %}' class='page_header_icon_background'>
+                    <img class='page_header_icon_img' src='{% static 'img/log_in_icon.png' %}'>
+                    <div class='page_header_link_description'>Zaloguj</div>
+                </a>
+            {% endif %}
+            {% if request.user.is_authenticated %}
+                <a href='{% url 'accounts:index' %}' class='page_header_icon_background'>
+                    <img class='page_header_icon_img' src='{% static 'img/settings_icon.png' %}'>
+                    <div class='page_header_link_description'>Konto</div>
+                </a>
+                <a href='{% url 'accounts:logout' %}' class='page_header_icon_background'>
+                    <img class='page_header_icon_img' src='{% static 'img/log_out_icon.png' %}'>
+                    <div class='page_header_link_description'>Wyloguj</div>
+                </a>
+            {% endif %}
+        </div>
+    </header>
+{% endblock menu %}

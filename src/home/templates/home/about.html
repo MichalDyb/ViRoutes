@@ -1,0 +1,23 @@
+{% extends 'base/index.html' %} 
+
+{% block content %}             
+    <nav class='flex-100'>
+        {% block navlink %} {% endblock navlink %}
+        {% include 'home/link/index.html' %}
+        <span class='nav_text'>O nas</span>
+    </nav>
+    <div class='flex-100'>
+    <h1 style='text-align:center;'>O nas<br>_</h1>
+    <h3 style='text-align:center;'>KOCHASZ PODRÓŻOWAĆ? W VIROUTES ZAWSZE DBAMY, ABYŚ TRAFIŁ DO CELU</h2>
+
+    <p style='text-align:center;'>
+        Naszym celem jest ułatwienie ludziom organizacji podróży, odkrywania nowych miejsc oraz zawierania nowych znajomości. Pomożemy ci rozwinąć skrzydła,
+        informując cię o przewidywanym czasie wędrówki, opinii innych użytkowników, a także warunkach pogodowych panujących na trasie.
+    </p>
+
+    <p style='text-align:center;'>
+        Staramy się wywołać uśmiech, pobudzić wyobraźnię i zachęcić do podróżowania. Jesteś profesjonalistą, zapalonym hobbystą, 
+        czy dopiero budzi się w Tobie chęć odkrywania świata - czuj się jak u siebie.
+        </p>
+    </div>
+{% endblock content %}

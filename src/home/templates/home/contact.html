@@ -1,0 +1,21 @@
+{% extends 'base/index.html' %} 
+
+{% block content %}             
+    <nav class='flex-100'>
+        {% block navlink %} {% endblock navlink %}
+        {% include 'home/link/index.html' %}
+        <span class='nav_text'>Dane kontaktowe</span>
+    </nav>
+
+    <div class='flex-100'>
+    <h2 class='info' style='text-align:center;'> {{ message1 }}</h1>
+    <h3 style='text-align:center;'> {{ message2 }}</h1>
+    <form class='my_form' action='{% url 'home:contact' %}' method='POST'>
+        {% csrf_token %}
+        <h1>Kontakt</h1>
+        <h3>Masz jakiś problem? Skontaktuj się z nami!</h3>
+        {{ form.as_p }}
+        <p><input id='submit' type='submit' value='Wyślij wiadomość'></p>
+    </form>
+    </div>
+{% endblock content %}

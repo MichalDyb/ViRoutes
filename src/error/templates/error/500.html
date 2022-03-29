@@ -1,0 +1,13 @@
+{% extends 'base/index.html' %} 
+
+{% block content %}             
+    <nav class='flex-100'>
+        {% block navlink %} {% endblock navlink %}
+        {% include 'home/link/index.html' %}
+        <span class='nav_text'>Strona błędu</span>
+    </nav>
+
+    <div class='flex-100'>
+        <h1 class='error_page_info'>Błąd po stronie serwera</h1>
+    </div>
+{% endblock content %}         

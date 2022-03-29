@@ -1,0 +1,28 @@
+{% extends 'base/index.html' %} 
+
+{% block content %}             
+    <nav class='flex-100'>
+        {% block navlink %} {% endblock navlink %}
+        {% include 'home/link/index.html' %}
+        {% include 'routes/link/profile.html' %}
+        {% include 'routes/link/my-routes.html' %}
+        <span class='nav_text'>Usuń trasę</span>
+    </nav>
+    <div class='flex-100'>
+        <h1>Usuń trasę</h1>
+        <h2>Czy na pewno chcesz usunąć trasę "{{ route_name }}"?</h2>
+        {% for message in messages %}
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+            <p class='info'>{{ message }}</p>
+        {% elif message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+            <p class='error'>{{ message }}</p>
+        {% else %}
+            <p>{{ message }}</p>
+        {% endif %}
+    {% endfor %}
+    </div>
+    <div class='flex-100'>
+        <a href='{% url 'routes:delete-route' route=route confirmed='yes' next_url=next_url %}'><button class='change_page_button'>Potwierdź</button></a>
+        <a href='{% url 'routes:delete-route' route=route confirmed='no' next_url=next_url %}'><button class='change_page_button'>Powrót</button></a>
+    </div>
+{% endblock content %}

@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html lang='pl-PL'>
+    <head>
+        <title>{{ title }}ViRoutes</title> 
+        <meta charset='utf-8'/>
+        <meta name='author' content='Michał Dybaś'>
+        <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        {% load static %}                              
+        <link rel='stylesheet' type='text/css' href='{% static 'css/base.css' %}'>      
+        <link rel='stylesheet' type='text/css' href='{% static 'css/layout.css' %}'>    
+        <link rel='stylesheet' type='text/css' href='{% static 'css/module.css' %}'>    
+        <link rel='stylesheet' type='text/css' href='{% static 'css/state.css' %}'>     
+        <link rel='stylesheet' type='text/css' href='{% static 'css/theme.css' %}'>
+    </head>            
+    <body>
+        <div id='top'></div>
+        {% block menu %}{% endblock menu %}             
+        {% include 'base/menu.html' %} 
+
+        <main id='page_main'>
+            {% block content %} {% endblock content %} 
+        </main>
+        
+        {% block footer %}{% endblock footer %}         
+        {% include 'base/footer.html' %} 
+        <a id='link_to_top' href='#top'><img id='link_to_top_img' src='{% static 'img/arrow_up_icon.png' %}'></a>
+    </body>
+    <script type='text/javascript' src='{% static 'js/base.js' %}'></script>
+</html>

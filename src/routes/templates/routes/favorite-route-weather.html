@@ -1,0 +1,66 @@
+{% extends 'base/index.html' %} 
+{% load static %}
+{% load my_templatetag %}
+
+{% block content %}             
+    <nav class='flex-100'>
+        {% block navlink %} {% endblock navlink %}
+        {% include 'home/link/index.html' %}
+        {% include 'routes/link/profile.html' %}
+        {% include 'routes/link/favorite-routes.html' %}
+        <span class='nav_text'>Prognoza pogody</span>
+    </nav>
+    <div class='flex-100'>
+        <h1>Warunki pogodowe trasy <span class='info'>{{ page_route.name }}</span>, autor: <span class='info'>{{ page_route.created_by.username }}</span></h1>
+        <h3></h3>
+        {% for message in messages %}
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+            <p class='info'>{{ message }}</p>
+        {% elif message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+            <p class='error'>{{ message }}</p>
+        {% else %}
+            <p>{{ message }}</p>
+        {% endif %}
+        {% endfor %}
+    </div>
+
+    <div class='flex-100 flex-row'>
+        {% if locations == None %}
+            <h1 class='error'>Nie udało się przeprowadzić prognozy pogody dla tej trasy.</h1>
+        {% else %}
+
+            {% for location in locations  %}
+            <table class='flex-100'>
+
+                <tr class='flex-100 my-td'>
+                    <td>
+                        <h3 style='margin-bottom:0;'>Punkt: <span class='info'>{{ location }}</span></h2>
+                    </td>
+                </tr>
+                <tr class='my_tr_m flex-row my_table info'>
+                    <th class='my_td flex-1'>Data prognozy </th>
+                    <th class='my_td flex-1'>Temperatura Min <br> (&#8451;)</th>
+                    <th class='my_td flex-1'>Temperatura Max <br> (&#8451;)</th>
+                    <th class='my_td flex-1'>Zachmurzenie<br> (%)</th>
+                    <th class='my_td flex-1'>Prędkość wiatru <br> (km/h)</th>
+                    <th class='my_td flex-1'>Warunki pogodowe</th>
+                </tr>
+
+                {% for values in locations|dict_key:location|dict_key:'values'  %}
+                    <tr class='my_tr_m flex-row my_table'>
+                        {% time_add forloop.counter0 as date %}
+                        <td class='my_td flex-1 text-center'>{{ date|date:"j E Y" }}</td>
+                        <td class='my_td flex-1 text-center'>{{ values|dict_key:'mint' }}</td>
+                        <td class='my_td flex-1 text-center'>{{ values|dict_key:'maxt' }}</td>
+                        <td class='my_td flex-1 text-center'>{{ values|dict_key:'cloudcover' }}</td>
+                        <td class='my_td flex-1 text-center'>{{ values|dict_key:'wspd' }}</td>
+                        <td class='my_td flex-1 text-center'>{{ values|dict_key:'conditions'|translate_conditions }}</td>             
+                    </tr>
+                {% endfor %}
+            </table>
+            {% endfor %}
+
+        {% endif %}
+    </div>
+    
+{% endblock content %}

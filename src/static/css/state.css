@@ -1,0 +1,89 @@
+/* 
+SMACSS (ang. Scalable and Modular Architecture for CSS), oznacza skalowalną i modularną architekturę CSS
+W tej sekcji określone są różne statusy modułów i podstaw witryny. 
+W tej sekcji używam klas, sekcja w której słowo kluczowe !important jest używane.
+*/
+
+.footer_link:hover {
+    color:hsl(204, 66%, 60%); 
+    text-decoration: underline; 
+}
+
+#link_to_top:hover {
+    cursor: pointer; 
+    background-color: hsl(0, 0%, 80%); 
+}
+
+#page_header_menu_button:hover {
+    cursor: pointer; 
+}
+
+#page_header_menu_button:active {
+    background-color: hsl(0, 0%, 30%);
+}
+
+.page_header_collapsed_menu_content_description_dynamic:hover {
+    cursor: pointer;
+}
+
+.page_header_collapsed_menu_content_description_dynamic:active {
+    background-color: hsl(0, 0%, 30%);
+}
+
+.page_header_collapsed_menu_content_link:hover {
+    background-color: hsl(0, 0%, 28%);
+    color: hsl(0, 0%, 100%);
+    text-decoration: none;
+}
+
+.page_header_collapsed_menu_content_link:active {
+    background-color: hsl(0, 0%, 10%);
+}
+
+#page_header_end > .page_header_icon_background:hover {
+    background-color: hsl(0, 0%, 28%); 
+}
+
+.page_header_icon_background:hover > .page_header_link_description{
+    display: block; 
+} 
+
+@media (max-width: 500px) {
+    #page_header_clock {
+        display: none;
+    }
+
+    #page_main {
+        padding: 30px 15px 30px 15px;
+        width: calc(100% - 30px);
+    }
+
+    body {
+        font-size: 0.9em;
+    }
+}
+
+@media (max-width: 350px) {
+    #page_header_end {
+        display: none;
+    }
+}
+
+.my_form input[type=button]:hover, .my_form input[type=submit]:hover, .my_form input[type=reset]:hover {
+    cursor: pointer;
+}
+
+.my_form input[type=button]:active, .my_form input[type=submit]:active, .my_form input[type=reset]:active {
+    background-color: hsl(204, 66%, 35%); 
+}
+
+@media (min-width: 536px) {
+    .my_form input[type=button], .my_form input[type=submit], .my_form input[type=reset] {
+        margin-left: 150px;
+    }
+    .my_form label {    
+        text-align: right;
+        width: 142px;
+        margin-right: 8px;
+    }
+}

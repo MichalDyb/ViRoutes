@@ -1,0 +1,33 @@
+{% extends 'base/index.html' %} 
+
+{% block content %}             
+    <nav class='flex-100'>
+        {% block navlink %} {% endblock navlink %}
+        {% include 'home/link/index.html' %}
+        <span class='nav_text'>Moje konto</span>
+    </nav>
+
+    <div class='flex-100'>
+        <h1>Moje konto 
+        {% if user.is_superuser %}- <span class='info'>administrator</span>{% endif %}
+        {% if not user.is_superuser and user.is_staff %}- <span class='info'>pracownik</span>{% endif %}
+        </h1>
+        <h3>
+            Nazwa użytkownika: <span class='info'>{{ request.user.username }} </span>
+        </h3>
+        <h3>
+            Adres email: <span class='info'>{{ request.user.email }}</span> 
+            <a href='{% url 'accounts:change-email' %}' class='button_link'>Zmień adres email</a>
+        </h3>
+        <h3>Hasło: <span class='info'> ********** </span> 
+        <a href='{% url 'accounts:change-password' %}' class='button_link'>Zmień hasło</a>
+        <h3>
+            Imię i nazwisko: <span class='info'>{{ request.user.first_name }} {{ request.user.last_name }}</span>
+            <a href='{% url 'accounts:change-personal-data' %}' class='button_link'>Zmień dane personalne</a>
+        </h3>
+        <br>
+        <h3>Data ostatniego logowania: <span class='info'>{{ request.user.last_login }}</span></h3>
+        <h3>Data utworzenia konta: <span class='info'>{{ request.user.date_joined }}</span></h3>
+        
+    </div>
+{% endblock content %}

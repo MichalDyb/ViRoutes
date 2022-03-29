@@ -1,0 +1,21 @@
+{% extends 'base/index.html' %} 
+
+{% block content %}             
+    <nav class='flex-100'>
+        {% block navlink %} {% endblock navlink %}
+        {% include 'home/link/index.html' %}
+        <span class='nav_text'>Logowanie</span>
+    </nav>
+
+    <div class='flex-100'>
+    <form class='my_form' action='{% url 'accounts:login' %}' method='POST'>
+        {% csrf_token %}
+        <h1>Logowanie</h1>
+        <h2>Wprowadź dane logowania</h2>
+        {{ form.as_p }}
+        <p><input id='submit' type='submit' value='Zaloguj'></p>
+        <p><a href='{% url 'accounts:register' %}'>Nie masz konta? Zarejestruj się</a></p>
+        <input type='hidden' name='next' value='{{ next }}'>
+    </form>
+    </div>
+{% endblock content %}

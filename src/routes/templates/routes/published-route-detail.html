@@ -1,0 +1,57 @@
+{% extends 'base/index.html' %} 
+{% load static %}
+
+{% block content %}             
+    <nav class='flex-100'>
+        {% block navlink %} {% endblock navlink %}
+        {% include 'home/link/index.html' %}
+        {% include 'routes/link/routes.html' %}
+        <span class='nav_text'>Szczegóły trasy</span>
+    </nav>
+    <div class='flex-100'>
+        <h1>Szczegóły trasy <span class='info'>{{ page_route.name }}</span>, autor: <span class='info'>{{ page_route.created_by.username }}</span></h1>
+        {% for message in messages %}
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+            <p class='info'>{{ message }}</p>
+        {% elif message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+            <p class='error'>{{ message }}</p>
+        {% else %}
+            <p>{{ message }}</p>
+        {% endif %}
+    {% endfor %}
+        <h2>Średnia ocen: <span class='info'>{{ page_route.avgRate }}</span></h2>
+        <form class='flex-100 small_submit_button' action='{% url 'routes:add-route-rate' route=page_route.id next_url=request.path %}' method='POST'>
+            {% csrf_token %}
+            <h3>Dodaj ocenę:
+                {{ form2.rate }}
+            <input id='submit' type='submit' value='Oceń'>
+            </h3>
+        </form>
+        <h3>Opis trasy: {{ page_route.description }}</p>
+
+    </div>
+
+    <iframe src='{{ page_route.url }}' id='map_frame' class='flex-100'></iframe>
+
+    <div class='flex-100'>
+        <h1>Komentarze</h1>
+        <form class='flex-100 small_submit_button' action='{% url 'routes:add-route-comment' route=page_route.id next_url=request.path %}' method='POST' style='margin-bottom:40px;'>
+            {% csrf_token %}
+            <textarea name="content" cols="40" rows="4" style='width:100%; resize: none; font-size:1.2em;' required="" id="id_content"></textarea>
+            <input id='submit' type='submit' value='Dodaj komentarz' style='float:right; font-size:1.2em;'>
+        </form>
+
+        {% for comment in page_comments %}
+            <div style='font-weight:600;'>{{ comment.created_by.username }} {{ comment.date_created|date:"H:i:s j E Y" }}</div>
+            <div style='margin-top:2px;'>{{ comment.content }}</div> 
+            <div style='margin-top:3px;'>
+            <a style='margin-right:1px;' href='{% url 'routes:add-comment-rate' comment=comment.id rate=1 next_url=request.path %}'><img class='comment_arrow' src='{% static 'img/comment_arrow_up.png' %}'></a>
+            <span class='comment_rate_text'>{{ comment.sumRate }}</span>
+            <a style='margin-left:1px;' href='{% url 'routes:add-comment-rate' comment=comment.id rate=-1 next_url=request.path %}'><img class='comment_arrow' src='{% static 'img/comment_arrow_down.png' %}'></a>
+            </div> 
+            <hr>
+            {% empty %}
+            Brak Komentarzy
+        {% endfor %}
+    </div>
+{% endblock content %}

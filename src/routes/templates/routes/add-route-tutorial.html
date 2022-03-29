@@ -1,0 +1,32 @@
+{% extends 'base/index.html' %} 
+
+{% block content %}             
+    <nav class='flex-100'>
+        {% block navlink %} {% endblock navlink %}
+        {% include 'home/link/index.html' %}
+        {% include 'routes/link/profile.html' %}
+        <span class='nav_text'>Poradnik wyznaczania trasy</span>
+    </nav>
+
+    {% load static %}
+
+    <div class='flex-100'>
+    <h3>1. Skorzystaj wbudowanej w stronę mapy lub przejdź do pełnego klienta mapy dostępnego pod adresem <a href='https://maps.openrouteservice.org/#/'>maps.openrouteservice.org</a></h3>
+    <img class='tutorial_img' src='{% static 'routes/img/tutorial-1.png' %}'>
+    <h3>2. Korzystając z podkreślonego na żółto przycisku rozwiń menu klienta mapy.</h3>
+    <img class='tutorial_img' src='{% static 'routes/img/tutorial-2.png' %}'>
+    <h3>3. Korzystając z podkreślonego na żółto przycisku rozpocznij wybieranie trasy.</h3>
+    <img class='tutorial_img' src='{% static 'routes/img/tutorial-3.png' %}'>
+    <h3>4. Po naciśnięciu przycisku podkreślonego na żółto, możemy zaznaczyć dla danego punktu lokalizację klikając na mapie. Adres można również wpisać ręcznie i wyszukać w polu
+    tekstowym przypisanym do danego punktu. Za pomocą przycisku zaznaczonego na zielono, możemy dodać więcej punktów lokalizacyjnych do naszej trasy.<br>
+    <span class='error'>Uwaga! Adresem punktu nie może być twoja aktualna lokalizacja. (Opcja przekreślona na czerwono)</span></h3>
+    <img class='tutorial_img' src='{% static 'routes/img/tutorial-4.png' %}'>
+    <h3>5. Naciśnięcie przycisku zaznaczonego na zółto sprawi, że dany punkt będzie prowadził do następnego punktu po linii prostej, a nie według ustalonego profilu.<br>
+    <span class='info'>Jeśli trasa została już zaznaczona, aby pobrać adres url trasy, należy kliknąć podkreślony na zielono przycisk, który otworzy odpowiednie do tego menu.</span></h3>
+    <img class='tutorial_img' src='{% static 'routes/img/tutorial-5.png' %}'>
+    <h3>6. W celu pobrania adresu url trasy klikamy na zaznaczone na zółto pole. Po kliknięcu na pole, adres zostanie automatycznie skopiowany do schowka.<br>
+    <span class='error'>Uwaga! Pamiętaj, aby pobrać pełny adres url trasy, jeśli chcesz dodać go do pola formularza. (Czerwony przycisk powinien zawierać napis SHORT)</span></h3>
+    <img class='tutorial_img' src='{% static 'routes/img/tutorial-6.png' %}'>
+    </div>
+
+{% endblock content %}

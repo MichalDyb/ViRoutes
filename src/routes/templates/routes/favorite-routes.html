@@ -1,0 +1,102 @@
+{% extends 'base/index.html' %} 
+{% load my_templatetag %}
+
+{% block content %}             
+    <nav class='flex-100'>
+        {% block navlink %} {% endblock navlink %}
+        {% include 'home/link/index.html' %}
+        {% include 'routes/link/profile.html' %}
+        <span class='nav_text'>Ulubione trasy</span>
+    </nav>
+
+    <div class='flex-100'>
+    <h1 >Ulubione trasy</h1>
+    {% for message in messages %}
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+            <p class='info'>{{ message }}</p>
+        {% elif message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+            <p class='error'>{{ message }}</p>
+        {% else %}
+            <p>{{ message }}</p>
+        {% endif %}
+    {% endfor %}
+    </div>
+
+    <div class='flex-row flex-100'>
+        <table class='flex-100'>
+
+        <tr class='my_tr flex-row my_table info'>
+            <th class='my_td flex-1'>Nazwa trasy</th>
+            <th class='my_td flex-1'>Autor</th>
+            <th class='my_td flex-1'>Ocena</th>
+            <th class='my_td flex-1'>Data utworzenia</th>
+            <th class='my_td flex-1'>Data publikacji</th>
+            <th class='my_td flex-100' style='text-align:left;'>Opis trasy</th>
+        </tr>
+
+        {% for route in page_routes  %}
+
+        <tr class='flex-100 my-td'>
+            <td>
+                <form class='flex-100 small_submit_button' action='{% url 'routes:add-route-rate' route=route.id next_url=request.path %}' method='POST'>
+                    {% csrf_token %}
+                    <label for="{{ form.rate.id_for_label }}">Dodaj ocenę:</label>
+                    {{ form.rate }}
+                    <input id='submit' type='submit' value='Oceń'>
+                </form>
+            </td>
+        </tr>
+
+
+        <tr class='my_tr flex-row my_table'>
+            <td class='my_td flex-1 text-center'>{{route.name}}</td>
+            <td class='my_td flex-1 text-center'>{{route.created_by.username}}</td>
+            <td class='my_td flex-1 text-center'>{{route.avgRate}}</td>
+            <td class='my_td flex-1 text-center'>{{route.date_created|date:"j E Y"}}</td>
+            {% if route.date_published == None %}
+                <td class='my_td flex-1 text-center'>Nie opublikowano</td>
+            {% else %}
+                <td class='my_td flex-1 text-center'>{{route.date_published|date:"j E Y"}}</td>
+            {% endif %}
+            {% if route.description|length < 1 %}
+                <td class='my_td flex-100'>Brak opisu</td>
+            {% elif route.description|length > 100 %}
+            <td class='my_td flex-100'>{{route.description|truncatechars:100}}</td>
+            {% else %}
+                <td class='my_td flex-100'>{{route.description}}</td>
+            {% endif %}
+            
+            <td class='my_td flex-100' style='text-align:center;'>
+                <a href='{% url 'routes:favorite-route-detail' route=route.id %}' style='padding: 0 3px 0 3px;'>Szczegóły trasy</a>
+                <a href='{% url 'routes:favorite-route-weather' route=route.id %}' style='padding: 0 3px 0 3px;'>Prognoza pogody</a>
+                {% call_method route 'isLiked' request.user.id as liked %}
+                {% if liked %}
+                    <a href='{% url 'routes:delete-favorite-route' route=route.id next_url=request.path %}' style='padding: 0 3px 0 3px;'>Usuń z ulubionych</a>
+                {% else %}
+                    <a href='{% url 'routes:add-favorite-route' route=route.id next_url=request.path %}' style='padding: 0 3px 0 3px;'>Dodaj do ulubionych</a>
+                {% endif %}
+                {% if route.created_by == request.user %}
+                    {% if route.is_published == True %}
+                        <a href='{% url 'routes:edit-route' route=route.id next_url=request.path %}' style='padding: 0 3px 0 3px;'>Edytuj trasę</a>
+                    {% else %}
+                        <a href='{% url 'routes:edit-route-full' route=route.id next_url=request.path %}' style='padding: 0 3px 0 3px;'>Edytuj trasę</a>
+                        <a href='{% url 'routes:delete-route' route=route.id next_url=request.path %}' style='padding: 0 3px 0 3px;'>Usuń trasę</a>
+                    {% endif %}
+                {% endif %}
+            </td>
+        </tr>
+        </div>
+        {% empty %}
+            <tr class='my_tr flex-row my_table'>
+                <td class='my_td flex-100 text-center'>Lista jest pusta</td>
+            </tr>
+        {% endfor %}
+        </table>
+    </div>
+
+    <div class='flex-row flex-100 flex-justify-center flex-align-center' style='margin-top:auto;'>
+        <div class='flex-100' style='text-align:center;'>Strona {{ current_page }} / {{ full_pages}}</div>
+        <a href='{% url 'routes:favorite-routes'%}page/{{ previous_page }}'><button class='change_page_button'>{{ '<' }} Poprzednia</button></a>
+        <a href='{% url 'routes:favorite-routes'%}page/{{ next_page }}'><button class='change_page_button'>Następna {{ '>' }} </button></a>
+    </div>
+{% endblock content %}

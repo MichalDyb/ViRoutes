@@ -1,0 +1,10 @@
+{% block footer %}     
+    <footer id='page_footer'>
+        <a href='{% url 'home:index' %}' class='footer_link'>Strona główna</a>
+        <a href='{% url 'home:privacy' %}' class='footer_link'>Polityka prywatności</a>
+        <a href='{% url 'home:cookies' %}' class='footer_link'>Polityka Cookies</a>
+        <a href='{% url 'home:contact' %}' class='footer_link'>Kontakt</a>
+        <a href='{% url 'home:about' %}' class='footer_link'>O nas</a>
+        <div id='footer_copyright'></div>
+    </footer>
+{% endblock footer %}   

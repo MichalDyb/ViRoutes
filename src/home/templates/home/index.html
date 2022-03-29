@@ -1,0 +1,24 @@
+{% extends 'base/index.html' %} 
+
+{% block content %}             
+    <nav class='flex-100'>
+        {% block navlink %} {% endblock navlink %}
+        <span class='nav_text'>Strona główna</span>
+    </nav>
+
+    <div class='flex-100'>
+        <h1>Witaj w ViRoutes</h1>
+        <h2>Jeśli kochasz podróżwować to znalazłeś się w odpowiednim miejscu.</h2>
+        <p> Naszym celem jest ułatwienie ludziom organizacji podróży, odkrywania nowych miejsc oraz 
+            zawierania nowych znajomości. Pomożemy ci rozwinąć skrzydła, informując cię o przewidywanym 
+            czasie wędrówki, opinii innych użytkowników, a także warunkach pogodowych panujących na 
+            trasie. Staramy się wywołać uśmiech, pobudzić wyobraźnię i zachęcić do podróżowania. 
+            Jesteś profesjonalistą, zapalonym hobbystą, czy dopiero budzi się w Tobie chęć odkrywania 
+            świata - czuj się jak u siebie.</p>
+    </div>
+
+
+    <iframe src='https://maps.openrouteservice.org' id='map_frame' class='flex-100'></iframe>
+
+{% endblock content %}        
+

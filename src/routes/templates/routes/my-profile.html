@@ -1,0 +1,25 @@
+{% extends 'base/index.html' %} 
+
+{% block content %}             
+    <nav class='flex-100'>
+        {% block navlink %} {% endblock navlink %}
+        {% include 'home/link/index.html' %}
+        <span class='nav_text'>Mój profil</span>
+    </nav>
+
+    <div class='flex-100'>
+        <h1>Profil użytkownika <span class='info'>{{ request.user.username }}</span>
+        <h3>Liczba nieopublikowanych tras: <span class='info'>{{ numberRouteNotPublished }}</span></h3> 
+        <h3>Liczba opublikowanych tras: <span class='info'>{{ numberRoutePublished }}</span></h3>
+        <h3>Liczba ulubionych tras: <span class='info'>{{ numberFavorite }}</span></h3> 
+        <h3>Liczba komentarzy: <span class='info'>{{ numberComment }}</span></h3> 
+        <h3>Data ostatniego logowania: <span class='info'>{{ request.user.last_login }}</span></h3>
+        <h3>Data utworzenia konta: <span class='info'>{{ request.user.date_joined }}</span></h3> 
+        
+        <a href='{% url 'routes:my-routes' %}' class='button_link'>Moje trasy</a>
+        <a href='{% url 'routes:my-comments' %}' class='button_link'>Moje komentarze</a>
+        <a href='{% url 'routes:favorite-routes' %}' class='button_link'>Ulubione trasy</a>
+        <a href='{% url 'routes:add-route' %}' class='button_link'>Dodaj trasę</a>
+        
+    </div>
+{% endblock content %}

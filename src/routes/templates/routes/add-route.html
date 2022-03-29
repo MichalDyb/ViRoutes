@@ -1,0 +1,34 @@
+{% extends 'base/index.html' %} 
+
+{% block content %}             
+    <nav class='flex-100'>
+        {% block navlink %} {% endblock navlink %}
+        {% include 'home/link/index.html' %}
+        {% include 'routes/link/profile.html' %}
+        {% include 'routes/link/my-routes.html' %}
+        <span class='nav_text'>Dodaj trasę</span>
+    </nav>
+    <div class='flex-100'>
+        <h1>Dodaj trasę</h1>
+        <h2>Wprowadź dane trasy</h2>
+        <h3>W przypadku problemów z pobraniem adres url trasy, skorzystaj z naszego <a href='{% url 'routes:tutorial' %}'>poradnika</a>.</h3>
+        {% for message in messages %}
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+            <p class='info'>{{ message }}</p>
+        {% elif message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+            <p class='error'>{{ message }}</p>
+        {% else %}
+            <p>{{ message }}</p>
+        {% endif %}
+    {% endfor %}
+    </div>
+    <iframe src='https://maps.openrouteservice.org' id='map_frame' class='flex-100'></iframe>
+    <div class='flex-100'>
+    <form class='my_form' action='{% url 'routes:add-route' %}' method='POST'>
+        {% csrf_token %}
+
+        {{ form.as_p }}
+        <p><input id='submit' type='submit' value='Dodaj trasę'></p>
+    </form>
+    </div>
+{% endblock content %}
